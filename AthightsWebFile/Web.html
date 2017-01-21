@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+<title>This is a Web Page Title</title>
+<link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script>
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function makestring(len) {
+	var text = "";
+	var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 !@#$%^&*()`~-_=+";
+
+	for( var i=0; i < len; i++ ) {
+		text += possible.charAt(Math.floor(Math.random() * possible.length));
+	}
+	return text;
+}
+
+window.onload = function() {
+	var speed = 0;
+
+	var url = window.location.href;
+	var query = url.split('?')[1];
+	if (query !== undefined) {
+		var fin = query.split('=')[1]
+		if (fin !== undefined) {
+			speed = parseInt(fin);
+		}
+	}
+
+	if (!(speed >= 0) && !(speed <= 0)) {
+		speed = 0;
+	}
+	
+	document.body.append("Hi");
+
+	var rotation = 0;
+	var string = "Hello World!";
+	var current = "asdfaaasdfaa";
+	var upTo = 0;
+	window.setInterval(function () {
+		current = current.slice(0, upTo) + makestring(string.length - upTo);
+		if (upTo < string.length && speed > 0) {
+			if (current[upTo] == string[upTo]) {
+				upTo++;
+			}
+			document.getElementsByClassName("out")[0].innerHTML = current
+		}
+
+		$('img').each(function() {
+			var deg = $(this).data('rotate') || 0;
+			rotation = rotation + speed % 360;
+			var rotate = 'rotate(' + (parseInt(deg) * rotation / 50) + 'deg)';
+			$(this).css({ 
+				'-webkit-transform': rotate,
+				'-moz-transform': rotate,
+				'-o-transform': rotate,
+				'-ms-transform': rotate,
+				'transform': rotate 
+			});
+		});
+
+		
+	}, 20);
+}
+</script>
+</head>
+<!--Requierments: ctrl+f -> "Hello World" & cats & git & form-->
+<body>
+
+<h1>Simple Heading</h1>
+
+<form action="Web.html">
+	Speed:<br>
+	<input type="text" name="speed" value="2"><br>
+	<input type="submit" value="Submit">
+</form>
+
+<p>Simple para... Lorum Ipsum!</p>
+
+<p class="out">GOOOOOOOOOOOOOOOOOO</p>
+
+<div class="parent">
+	<img class="locked" src="star.png" data-rotate="-1" />
+	<img class="locked" src="star.png" data-rotate="1" />
+	<img class="locked" src="star.png" data-rotate="-2" />
+	<img class="locked" src="star.png" data-rotate="2" />
+	<img class="locked" src="star.png" data-rotate="-3" />
+	<img class="locked" src="star.png" data-rotate="3" />
+	<img class="lock2" src="cat.jpg" data-rotate="0.1" />
+</div>
+
+</body>
+</html>

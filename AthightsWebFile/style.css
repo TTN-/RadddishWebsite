@@ -1,0 +1,25 @@
+body {
+	background-color: powderblue;
+}
+h1 {
+	color: blue;
+}
+p {
+	color: red;
+	border: 1px solid #FF00FF;
+}
+.parent {
+  position: relative;
+  top: 0;
+  left: 0;
+}
+.locked {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.lock2 {
+  position: absolute;
+  top: 150px;
+  left: 150px;
+}
